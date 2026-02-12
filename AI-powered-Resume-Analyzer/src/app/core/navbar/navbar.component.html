@@ -1,0 +1,82 @@
+<nav class="fixed top-0 left-0 w-full 
+            bg-white/70 backdrop-blur-lg 
+            border-b border-gray-200 
+            shadow-sm z-50">
+
+  <div class="max-w-7xl mx-auto px-8 py-4 flex justify-between items-center">
+    
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center space-x-3 group">
+      <!-- <img src="assets/Images/logo.png" 
+           class="h-9 w-9 transition-transform duration-300 group-hover:rotate-12" 
+           alt="Logo"> -->
+      
+      <span class="text-2xl font-extrabold 
+                   bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 
+                   bg-clip-text text-transparent">
+        NextHire
+      </span>
+    </a>
+
+    <!-- Navigation Links -->
+    <div class="hidden md:flex space-x-10 text-gray-700 font-medium">
+      
+      <a routerLink="/" 
+         routerLinkActive="text-indigo-600"
+         class="relative group transition">
+        Home
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 
+                     bg-indigo-600 transition-all duration-300 
+                     group-hover:w-full"></span>
+      </a>
+
+      <a routerLink="/jobs" 
+         routerLinkActive="text-indigo-600"
+         class="relative group transition">
+        Find Jobs
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 
+                     bg-indigo-600 transition-all duration-300 
+                     group-hover:w-full"></span>
+      </a>
+
+      <a routerLink="/about" 
+         routerLinkActive="text-indigo-600"
+         class="relative group transition">
+        About
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 
+                     bg-indigo-600 transition-all duration-300 
+                     group-hover:w-full"></span>
+      </a>
+
+      <a routerLink="/contact" 
+         routerLinkActive="text-indigo-600"
+         class="relative group transition">
+        Contact
+        <span class="absolute left-0 -bottom-1 w-0 h-0.5 
+                     bg-indigo-600 transition-all duration-300 
+                     group-hover:w-full"></span>
+      </a>
+
+    </div>
+
+    <!-- Buttons -->
+    <div class="flex items-center space-x-4">
+      
+      <a routerLink="/auth/login" 
+         class="text-gray-700 hover:text-indigo-600 font-medium transition">
+        Sign In
+      </a>
+
+      <a routerLink="/auth/register"
+         class="relative px-6 py-2.5 
+                bg-gradient-to-r from-indigo-600 to-purple-600 
+                text-white rounded-xl font-semibold 
+                shadow-md hover:shadow-lg 
+                hover:scale-105 transition duration-300">
+        Get Started
+      </a>
+
+    </div>
+
+  </div>
+</nav>

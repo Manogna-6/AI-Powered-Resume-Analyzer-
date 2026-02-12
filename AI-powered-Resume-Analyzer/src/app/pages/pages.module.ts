@@ -1,4 +1,4 @@
-// Group of normal public pages.
+// pages.module.ts
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -8,20 +8,19 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { JobsComponent } from './jobs/jobs.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
   declarations: [
     HomeComponent,
     AboutComponent,
     ContactComponent,
-    JobsComponent,
-    NotFoundComponent
+    JobsComponent
   ],
   imports: [
     CommonModule,
-    PagesRoutingModule
+    PagesRoutingModule,
+    CoreModule
   ]
 })
 export class PagesModule { }
