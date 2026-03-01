@@ -1,1 +1,84 @@
-<p>candidates works!</p>
+<div class="space-y-8">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">Candidates</h1>
+      <p class="text-sm text-gray-500">Manage and review applicants</p>
+    </div>
+
+    <button class="bg-indigo-600 text-white px-5 py-2 rounded-lg hover:bg-indigo-700 transition">
+      + Add Candidate
+    </button>
+  </div>
+
+  <!-- Search + Filters -->
+  <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col md:flex-row gap-4">
+
+    <input
+      type="text"
+      [(ngModel)]="searchText"
+      (input)="filterCandidates()"
+      placeholder="Search by name, skill, or role..."
+      class="flex-1 border px-4 py-2 rounded-lg outline-none focus:ring-2 focus:ring-indigo-500" />
+
+    <select [(ngModel)]="selectedStatus" (change)="filterCandidates()" class="border px-4 py-2 rounded-lg">
+      <option>All Status</option>
+      <option>Screening</option>
+      <option>Interview</option>
+      <option>Hired</option>
+      <option>Rejected</option>
+    </select>
+
+    <select [(ngModel)]="selectedPosition" (change)="filterCandidates()" class="border px-4 py-2 rounded-lg">
+      <option>All Positions</option>
+      <option>Frontend</option>
+      <option>Full Stack</option>
+      <option>Product</option>
+    </select>
+
+  </div>
+
+  <!-- Candidate Grid -->
+  <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+    <div *ngFor="let candidate of filteredCandidates"
+         class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+
+      <div class="flex justify-between items-start">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 bg-indigo-500 text-white rounded-full flex items-center justify-center font-semibold">
+            {{ getInitials(candidate.name) }}
+          </div>
+          <div>
+            <h2 class="font-semibold">{{ candidate.name }}</h2>
+            <p class="text-sm text-gray-500">{{ candidate.role }}</p>
+          </div>
+        </div>
+
+        <span class="text-xs px-3 py-1 rounded-full"
+              [ngClass]="getStatusClass(candidate.status)">
+          {{ candidate.status }}
+        </span>
+      </div>
+
+      <div class="mt-4 space-y-2 text-sm text-gray-600">
+        <p>📍 {{ candidate.location }}</p>
+        <p>💼 {{ candidate.experience }} years experience</p>
+        <p>🛠 {{ candidate.skills }}</p>
+      </div>
+
+      <div class="mt-4 flex justify-between items-center">
+        <span class="text-green-600 font-semibold">
+          Match {{ candidate.match }}%
+        </span>
+        <button class="text-indigo-600 text-sm hover:underline">
+          View Profile
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

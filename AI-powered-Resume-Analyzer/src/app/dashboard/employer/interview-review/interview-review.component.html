@@ -1,1 +1,84 @@
-<p>interview-review works!</p>
+<div class="space-y-8">
+
+  <!-- Header -->
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">Interview Reviews</h1>
+      <p class="text-sm text-gray-500">Evaluate and manage interview feedback</p>
+    </div>
+
+    <select
+      [(ngModel)]="selectedFilter"
+      (change)="filterInterviews()"
+      class="border px-4 py-2 rounded-lg text-sm">
+
+      <option>All Interviews</option>
+      <option>Pending Review</option>
+      <option>Completed</option>
+      <option>Rejected</option>
+
+    </select>
+  </div>
+
+  <!-- Interview Cards -->
+  <div class="grid lg:grid-cols-2 gap-6">
+
+    <div *ngFor="let interview of filteredInterviews"
+         class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition space-y-4">
+
+      <div class="flex justify-between items-start">
+        <div>
+          <h2 class="font-semibold text-lg">{{ interview.name }}</h2>
+          <p class="text-sm text-gray-500">{{ interview.role }}</p>
+        </div>
+
+        <span class="text-xs px-3 py-1 rounded-full"
+              [ngClass]="getStatusClass(interview.status)">
+          {{ interview.status }}
+        </span>
+      </div>
+
+      <div class="text-sm text-gray-600 space-y-1">
+        <p>📅 {{ interview.date }}</p>
+        <p>🕒 {{ interview.time }}</p>
+        <p>🎥 {{ interview.type }}</p>
+        <p>👤 Interviewer: {{ interview.interviewer }}</p>
+      </div>
+
+      <!-- Rating -->
+      <div class="flex items-center gap-1 text-yellow-500 text-lg">
+        <span *ngFor="let star of getStars(interview.rating)">★</span>
+        <span *ngFor="let star of getEmptyStars(interview.rating)" class="text-gray-300">★</span>
+      </div>
+
+      <!-- Notes -->
+      <div class="bg-gray-50 p-4 rounded-xl text-sm text-gray-600">
+        {{ interview.notes }}
+      </div>
+
+      <div class="flex justify-end gap-3">
+
+        <button class="px-4 py-2 border rounded-lg text-sm hover:bg-gray-50">
+          View Recording
+        </button>
+
+        <button
+          *ngIf="interview.status === 'Pending Review'"
+          (click)="submitReview(interview)"
+          class="px-4 py-2 bg-indigo-600 text-white rounded-lg text-sm hover:bg-indigo-700">
+          Submit Review
+        </button>
+
+        <button
+          *ngIf="interview.status === 'Completed'"
+          class="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm cursor-not-allowed">
+          Reviewed
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

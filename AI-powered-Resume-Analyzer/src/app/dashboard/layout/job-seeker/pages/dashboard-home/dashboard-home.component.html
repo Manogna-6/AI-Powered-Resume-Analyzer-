@@ -1,0 +1,193 @@
+<div class="space-y-8">
+
+  <div class="flex items-center justify-between">
+    <div>
+      <h1 class="text-3xl font-semibold text-gray-900">
+        Welcome back, John!
+      </h1>
+      <p class="text-gray-500 mt-1">
+        Here's what's happening with your job search
+      </p>
+    </div>
+
+    <div class="flex items-center gap-4">
+      <button class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center hover:bg-gray-200 transition">
+        🔔
+      </button>
+
+      <button class="px-5 py-2.5 rounded-xl bg-indigo-600 text-white font-medium shadow hover:bg-indigo-700 transition">
+        + Find Jobs
+      </button>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 text-xl">
+          📄
+        </div>
+        <div>
+<h3 class="text-2xl font-bold text-gray-900">
+  {{ resumeScore }}
+  <span class="text-lg text-gray-400">/100</span>
+</h3>          <p class="text-gray-500 text-sm">Resume Score</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-emerald-600 text-xl">
+          🎯
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-gray-900">
+  {{ jobMatches }}
+</h3>
+          <!-- <h3 class="text-2xl font-bold text-gray-900">24</h3> -->
+          <p class="text-gray-500 text-sm">Job Matches</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-teal-100 flex items-center justify-center text-teal-600 text-xl">
+          💼
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-gray-900">
+  {{ applications }}
+</h3>
+          <!-- <h3 class="text-2xl font-bold text-gray-900">8</h3> -->
+          <p class="text-gray-500 text-sm">Applications</p>
+        </div>
+      </div>
+    </div>
+
+   
+    <div class="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+      <div class="flex items-center gap-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-amber-600 text-xl">
+          🎥
+        </div>
+        <div>
+          <h3 class="text-2xl font-bold text-gray-900">
+  {{ interviews }}
+</h3>
+          <!-- <h3 class="text-2xl font-bold text-gray-900">3</h3> -->
+          <p class="text-gray-500 text-sm">Interviews</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid grid-cols-1 xl:grid-cols-3 gap-6">
+
+    <div class="xl:col-span-2 bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-6">
+        Resume Analysis
+      </h2>
+
+      <div class="border-2 border-dashed border-indigo-300 rounded-2xl p-16 text-center">
+
+        <div class="w-16 h-16 mx-auto rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl">
+          ⬆️
+        </div>
+
+        <h3 class="mt-6 text-lg font-medium text-gray-800">
+          Upload Your Resume
+        </h3>
+
+        <p class="text-gray-500 text-sm mt-2">
+          Drag and drop or click to upload (PDF, DOCX)
+        </p>
+<button
+  (click)="fileInput.click()"
+  class="mt-6 px-6 py-2.5 bg-emerald-500 text-white rounded-xl hover:bg-emerald-600 transition shadow">
+  Choose File
+</button>
+
+<input
+  #fileInput
+  type="file"
+  accept=".pdf,.doc,.docx"
+  (change)="onFileSelected($event)"
+  hidden
+/>
+
+<p *ngIf="resumeFileName" class="mt-4 text-sm text-emerald-600 font-medium">
+  ✔ {{ resumeFileName }} uploaded successfully
+</p>
+
+      </div>
+    </div>
+
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-semibold text-gray-900">
+          Recent Matches
+        </h2>
+        <button class="text-indigo-600 text-sm hover:underline">
+          View All
+        </button>
+      </div>
+
+      <div class="space-y-4">
+
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
+          <div>
+            <p class="font-medium text-gray-800">
+              Senior Frontend Developer
+            </p>
+            <p class="text-sm text-gray-500">
+              TechCorp • 95% match
+            </p>
+          </div>
+          <span class="text-xs bg-indigo-100 text-indigo-600 px-3 py-1 rounded-full">
+            Applied
+          </span>
+        </div>
+
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
+          <div>
+            <p class="font-medium text-gray-800">
+              Full Stack Engineer
+            </p>
+            <p class="text-sm text-gray-500">
+              StartupXYZ • 92% match
+            </p>
+          </div>
+          <span class="text-xs bg-emerald-100 text-emerald-600 px-3 py-1 rounded-full">
+            Interview
+          </span>
+        </div>
+
+        <div class="flex items-center justify-between p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition">
+          <div>
+            <p class="font-medium text-gray-800">
+              Product Designer
+            </p>
+            <p class="text-sm text-gray-500">
+              DesignHub • 88% match
+            </p>
+          </div>
+          <span class="text-xs bg-amber-100 text-amber-600 px-3 py-1 rounded-full">
+            New
+          </span>
+        </div>
+
+      </div>
+
+      <button class="mt-6 w-full py-2.5 rounded-xl border border-gray-200 hover:bg-gray-50 transition text-gray-700">
+        Explore More Jobs →
+      </button>
+
+    </div>
+
+  </div>
+
+</div>

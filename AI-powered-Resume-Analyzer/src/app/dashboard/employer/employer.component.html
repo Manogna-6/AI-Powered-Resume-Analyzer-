@@ -1,0 +1,74 @@
+<div class="flex min-h-screen bg-gray-100 mt-[60px]">
+
+  <!-- ================= SIDEBAR ================= -->
+  <aside class="w-64 bg-white border-r flex flex-col justify-between">
+
+    <div>
+      <!-- Logo -->
+      <div class="flex items-center gap-3 px-6 py-6">
+        
+        <h1 class="text-xl font-bold">NextHire</h1>
+      </div>
+
+      <!-- Navigation -->
+      <nav class="space-y-2 px-4">
+
+
+
+         <a routerLink="dashboard-home"
+           routerLinkActive="bg-indigo-100 text-indigo-600"
+           class="block px-4 py-3 rounded-xl hover:bg-gray-100 transition">
+              🏠 Dashboard
+        </a>
+
+        <a routerLink="analytics"
+           routerLinkActive="bg-indigo-100 text-indigo-600"
+           class="block px-4 py-3 rounded-xl hover:bg-gray-100 transition">
+          📊 Analytics
+        </a>
+
+        <a routerLink="candidates"
+           routerLinkActive="bg-indigo-100 text-indigo-600"
+           class="block px-4 py-3 rounded-xl hover:bg-gray-100 transition">
+          👥 Candidates
+        </a>
+
+        <a routerLink="interview-review"
+           routerLinkActive="bg-indigo-100 text-indigo-600"
+           class="block px-4 py-3 rounded-xl hover:bg-gray-100 transition">
+          🎥 Interviews
+        </a>
+
+        <a routerLink="post-job"
+           routerLinkActive="bg-indigo-100 text-indigo-600"
+           class="block px-4 py-3 rounded-xl hover:bg-gray-100 transition">
+          💼 Post Job
+        </a>
+
+      </nav>
+    </div>
+
+    <!-- Bottom -->
+    <div class="px-4 mb-6 space-y-3">
+      <div class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-100 cursor-pointer">
+        ⚙️ Settings
+      </div>
+       <button
+  (click)="logout()"
+  class="px-4 py-2 text-red-600 hover:bg-red-100 rounded-lg">
+  🚪 Sign Out
+</button>
+    </div>
+
+  </aside>
+
+
+  <!-- ================= MAIN CONTENT ================= -->
+  <main class="flex-1 p-8 overflow-y-auto">
+
+    <!-- 🔥 CHILD ROUTES RENDER HERE -->
+    <router-outlet></router-outlet>
+
+  </main>
+
+</div>

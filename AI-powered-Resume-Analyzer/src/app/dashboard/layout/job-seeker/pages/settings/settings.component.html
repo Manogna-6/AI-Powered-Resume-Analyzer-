@@ -1,0 +1,162 @@
+<div class="space-y-8" [formGroup]="profileForm">
+
+  <!-- Header -->
+  <div>
+    <h1 class="text-3xl font-semibold text-gray-900">
+      Account Settings
+    </h1>
+    <p class="text-gray-500 mt-1">
+      Manage your profile information and preferences
+    </p>
+  </div>
+
+  <!-- Profile Card -->
+  <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+
+    <div class="flex items-center gap-6 mb-8">
+      <div
+        class="w-20 h-20 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl font-semibold">
+        {{ initials }}
+      </div>
+
+      <div>
+        <h2 class="text-lg font-semibold text-gray-900">
+          {{ profileForm.value.fullName }}
+        </h2>
+        <p class="text-gray-500 text-sm">
+          {{ user.role }}
+        </p>
+      </div>
+
+      <button class="ml-auto px-4 py-2 text-sm border border-gray-200 rounded-xl hover:bg-gray-50 transition">
+        Change Photo
+      </button>
+    </div>
+
+    <!-- Form -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">
+          Full Name
+        </label>
+        <input
+          type="text"
+          formControlName="fullName"
+          class="mt-2 w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">
+          Email Address
+        </label>
+        <input
+          type="email"
+          formControlName="email"
+          class="mt-2 w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">
+          Phone Number
+        </label>
+        <input
+          type="text"
+          formControlName="phone"
+          class="mt-2 w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700">
+          Location
+        </label>
+        <input
+          type="text"
+          formControlName="location"
+          class="mt-2 w-full border border-gray-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-indigo-500">
+      </div>
+
+    </div>
+
+    <div class="mt-8 flex justify-end">
+      <button
+        (click)="saveChanges()"
+        class="px-6 py-2.5 bg-indigo-600 text-white rounded-xl shadow hover:bg-indigo-700 transition">
+        Save Changes
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Security Section -->
+  <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+
+    <h2 class="text-lg font-semibold text-gray-900 mb-6">
+      Security
+    </h2>
+
+    <div class="space-y-6">
+
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-medium text-gray-800">Password</p>
+          <p class="text-sm text-gray-500">
+            Last updated {{ user.passwordUpdated }}
+          </p>
+        </div>
+        <button
+          (click)="changePassword()"
+          class="px-4 py-2 border border-gray-200 rounded-xl hover:bg-gray-50 transition text-sm">
+          Change Password
+        </button>
+      </div>
+
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="font-medium text-gray-800">
+            Two-Factor Authentication
+          </p>
+          <p class="text-sm text-gray-500">
+            Add extra security to your account
+          </p>
+        </div>
+        <button
+          (click)="toggle2FA()"
+          class="px-4 py-2 border border-gray-200 rounded-xl hover:bg-gray-50 transition text-sm">
+          Enable
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Notifications -->
+  <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+
+    <h2 class="text-lg font-semibold text-gray-900 mb-6">
+      Notifications
+    </h2>
+
+    <div class="space-y-4">
+
+      <div class="flex items-center justify-between">
+        <p>Email notifications for new job matches</p>
+        <input type="checkbox" formControlName="jobMatches" class="w-5 h-5 accent-indigo-600">
+      </div>
+
+      <div class="flex items-center justify-between">
+        <p>Interview reminders</p>
+        <input type="checkbox" formControlName="interviewReminders" class="w-5 h-5 accent-indigo-600">
+      </div>
+
+      <div class="flex items-center justify-between">
+        <p>Application status updates</p>
+        <input type="checkbox" formControlName="statusUpdates" class="w-5 h-5 accent-indigo-600">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

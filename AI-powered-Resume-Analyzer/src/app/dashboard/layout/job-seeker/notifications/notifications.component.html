@@ -1,0 +1,26 @@
+<div class="relative" (click)="toggle()">
+
+  <div class="cursor-pointer relative">
+    🔔
+    <span class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+      3
+    </span>
+  </div>
+
+  <div *ngIf="open"
+       class="absolute right-0 mt-3 w-64 bg-white shadow-lg rounded-lg p-4">
+
+    <p class="text-sm mb-2 font-semibold">Notifications</p>
+
+    <div class="space-y-2 text-sm">
+      <div class="p-2 bg-gray-50 rounded">
+        New Job Match Found
+      </div>
+      <div class="p-2 bg-gray-50 rounded">
+        Interview Scheduled
+      </div>
+    </div>
+
+  </div>
+
+</div>

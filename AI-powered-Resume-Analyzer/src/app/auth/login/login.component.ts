@@ -1,46 +1,52 @@
-
-// Page where user logs in.
-
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Router } from '@angular/router';
+import { AuthService } from './../../services/auth.service';
 
 @Component({
   selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  templateUrl: './login.component.html'
 })
 export class LoginComponent {
 
+  loginForm: FormGroup;
+  showPassword = false;
 
-   selectedRole: 'jobseeker' | 'employer' = 'jobseeker';
-  registerForm: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
 
-  constructor(private fb: FormBuilder) {
-    this.registerForm = this.fb.group({
-      fullName: ['', Validators.required],
-      companyName: [''],
+    // ✅ Form with role added
+    this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      role: ['', Validators.required]   // ✅ IMPORTANT
     });
   }
 
-  selectRole(role: 'jobseeker' | 'employer') {
-    this.selectedRole = role;
-
-    if (role === 'employer') {
-      this.registerForm.get('companyName')?.setValidators([Validators.required]);
-    } else {
-      this.registerForm.get('companyName')?.clearValidators();
-    }
-
-    this.registerForm.get('companyName')?.updateValueAndValidity();
+  togglePassword() {
+    this.showPassword = !this.showPassword;
   }
 
   onSubmit() {
-    if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
+    if (this.loginForm.valid) {
+
+      const role = this.loginForm.value.role;
+
+      // ✅ Save dummy token (for AuthGuard)
+      this.authService.login('dummy-token');
+
+      // ✅ Save role properly (for RoleGuard)
+      this.authService.setRole(role);
+
+      // ✅ Navigate based on role
+      if (role === 'job-seeker') {
+        this.router.navigate(['/dashboard/job-seeker']);
+      } else if (role === 'employer') {
+        this.router.navigate(['/dashboard/employer']);
+      }
     }
   }
-  
 }

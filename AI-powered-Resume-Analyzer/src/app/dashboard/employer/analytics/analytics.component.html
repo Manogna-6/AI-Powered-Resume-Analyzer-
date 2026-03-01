@@ -1,1 +1,135 @@
-<p>analytics works!</p>
+<!-- Loading State -->
+<div *ngIf="loading" class="text-center py-10 text-gray-500">
+  Loading analytics...
+</div>
+
+<!-- Main Content -->
+<div *ngIf="!loading" class="space-y-8">
+
+  <!-- Page Header -->
+  <div class="flex justify-between items-center">
+    <div>
+      <h1 class="text-2xl font-bold">Analytics Dashboard</h1>
+      <p class="text-gray-500 text-sm">Overview of hiring performance</p>
+    </div>
+
+    <select class="border px-4 py-2 rounded-lg text-sm">
+      <option>Last 7 days</option>
+      <option>Last 30 days</option>
+      <option>This Year</option>
+    </select>
+  </div>
+
+  <!-- Stats Cards -->
+  <div class="grid md:grid-cols-4 gap-6">
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm">
+      <p class="text-sm text-gray-500">Total Jobs</p>
+      <h2 class="text-3xl font-bold mt-2">
+        {{ analytics?.totalJobs }}
+      </h2>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm">
+      <p class="text-sm text-gray-500">Total Applicants</p>
+      <h2 class="text-3xl font-bold mt-2">
+        {{ analytics?.totalApplicants }}
+      </h2>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm">
+      <p class="text-sm text-gray-500">Interviews Scheduled</p>
+      <h2 class="text-3xl font-bold mt-2">
+        {{ analytics?.interviews }}
+      </h2>
+    </div>
+
+    <div class="bg-white p-6 rounded-2xl shadow-sm">
+      <p class="text-sm text-gray-500">Hires</p>
+      <h2 class="text-3xl font-bold mt-2">
+        {{ analytics?.hires }}
+      </h2>
+    </div>
+
+  </div>
+
+  <!-- Charts Section -->
+  <div class="grid lg:grid-cols-2 gap-6">
+
+    <!-- Applications Trend -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm">
+      <h2 class="text-lg font-semibold mb-4">Applications Trend</h2>
+
+      <div class="h-64 flex items-center justify-center text-gray-400">
+        📊 Chart will be integrated here
+      </div>
+    </div>
+
+    <!-- Hiring Funnel -->
+    <div class="bg-white p-6 rounded-2xl shadow-sm">
+      <h2 class="text-lg font-semibold mb-4">Hiring Funnel</h2>
+
+      <div class="space-y-5">
+
+        <!-- Applicants -->
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Applicants</span>
+            <span>{{ analytics?.totalApplicants }}</span>
+          </div>
+          <div class="w-full bg-gray-200 h-3 rounded-full">
+            <div
+              class="bg-indigo-600 h-3 rounded-full transition-all duration-500"
+              [style.width.%]="100">
+            </div>
+          </div>
+        </div>
+
+        <!-- Screened -->
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Screened</span>
+            <span>{{ analytics?.screened }}</span>
+          </div>
+          <div class="w-full bg-gray-200 h-3 rounded-full">
+            <div
+              class="bg-indigo-500 h-3 rounded-full transition-all duration-500"
+              [style.width.%]="getPercentage(analytics?.screened)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Interviewed -->
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Interviewed</span>
+            <span>{{ analytics?.interviewed }}</span>
+          </div>
+          <div class="w-full bg-gray-200 h-3 rounded-full">
+            <div
+              class="bg-indigo-400 h-3 rounded-full transition-all duration-500"
+              [style.width.%]="getPercentage(analytics?.interviewed)">
+            </div>
+          </div>
+        </div>
+
+        <!-- Hired -->
+        <div>
+          <div class="flex justify-between text-sm mb-1">
+            <span>Hired</span>
+            <span>{{ analytics?.hires }}</span>
+          </div>
+          <div class="w-full bg-gray-200 h-3 rounded-full">
+            <div
+              class="bg-indigo-300 h-3 rounded-full transition-all duration-500"
+              [style.width.%]="getPercentage(analytics?.hires)">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
