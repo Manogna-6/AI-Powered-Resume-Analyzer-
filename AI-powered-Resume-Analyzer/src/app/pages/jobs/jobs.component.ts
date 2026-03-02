@@ -1,7 +1,7 @@
 //  Shows available jobs.
 
 
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Job } from 'src/app/models/job.model';
 
 
@@ -11,94 +11,108 @@ import { Job } from 'src/app/models/job.model';
   templateUrl: './jobs.component.html',
   styleUrls: ['./jobs.component.css']
 })
-export class JobsComponent {
-jobs: Job[] = [
+export class JobsComponent implements OnInit {
+ jobs: Job[] = [
     {
       id: 1,
       companyInitials: 'FD',
-      title: 'Senior Frontend Developer',
-      company: 'TechCorp Inc.',
-      location: 'San Francisco, CA',
+      title: 'Frontend Developer',
+      company: 'TechCorp',
+      location: 'Hyderabad',
       type: 'Full-time',
-      salary: '$120k - $180k',
+      salary: '₹12L - ₹18L',
       posted: '2 days ago',
-      skills: ['React', 'TypeScript', 'Tailwind CSS'],
+      skills: ['React', 'TypeScript'],
       match: 95
     },
     {
       id: 2,
       companyInitials: 'DS',
-      title: 'Data Science',
-      company: 'DataDriven Co.',
-      location: 'Boston, MA',
+      title: 'Data Scientist',
+      company: 'DataDriven',
+      location: 'Bangalore',
       type: 'Full-time',
-      salary: '$140k - $190k',
+      salary: '₹14L - ₹19L',
       posted: '5 days ago',
-      skills: ['Python', 'Machine Learning', 'SQL'],
+      skills: ['Python', 'ML'],
       match: 78
     },
     {
       id: 3,
-      companyInitials: 'BD',
-      title: 'Backend Developer',
-      company: 'Developer Co.',
-      location: 'France, MA',
-      type: 'Part-time',
-      salary: '$123k - $160k',
-      posted: '2 days ago',
-      skills: ['Python', 'Django', 'Nodejs'],
-      match: 78
-    },
-     {
-      id: 4,
-      companyInitials: 'WD',
-      title: 'Web Development',
-      company: 'Developer Co.',
-      location: 'Pairs, MA',
-      type: 'Full-time',
-      salary: '$1200k - $1500k',
-      posted: '1 days ago',
-      skills: ['Angular', 'ReactJs', 'Native ReactJs'],
-      match: 40
-    },
-     {
-      id: 5,
-      companyInitials: 'FD',
-      title: 'Full-Stack Development',
-      company: 'NexMind Co.',
-      location: 'India',
-      type: 'Full-time',
-      salary: '$2000k - $5000k',
-      posted: '1 days ago',
-      skills: ['Angular', 'ReactJs', ' NodeJs'],
-      match: 90
-    },
-    {
-      id: 6,
       companyInitials: 'PD',
       title: 'Python Developer',
-      company: 'SmartIdeas Co.',
-      location: 'India',
+      company: 'SmartIdeas',
+      location: 'Chennai',
       type: 'Part-time',
-      salary: '$500k - $1000k',
-      posted: '5 days ago',
-      skills: ['Python', 'DJango', ' Flask'],
-      match: 60
+      salary: '₹6L - ₹9L',
+      posted: '3 days ago',
+      skills: ['Python', 'Django'],
+      match: 65
     },
     {
-      id: 7,
-      companyInitials: 'DO',
-      title: 'DevOps',
-      company: 'Dev Co.',
-      location: 'India',
+      id: 4,
+      companyInitials: 'FS',
+      title: 'Full Stack Developer',
+      company: 'GlobalTech',
+      location: 'Pune',
       type: 'Full-time',
-      salary: '$1500k - $2000k',
-      posted: '3 days ago',
-      skills: ['Git', 'Linux', ' AWS'],
-      match: 80
-    },
-
-
-
+      salary: '₹10L - ₹15L',
+      posted: '1 day ago',
+      skills: ['Angular', 'Node'],
+      match: 88
+    }
   ];
+
+  filteredJobs: Job[] = [];
+
+  searchText: string = '';
+  selectedLocation: string = '';
+  selectedTypes: string[] = [];
+
+  ngOnInit(): void {
+    this.filteredJobs = [...this.jobs];
+  }
+
+  applyFilters(): void {
+
+    this.filteredJobs = this.jobs.filter(job => {
+
+      const matchesSearch =
+        job.title.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        job.company.toLowerCase().includes(this.searchText.toLowerCase()) ||
+        job.skills.some(skill =>
+          skill.toLowerCase().includes(this.searchText.toLowerCase())
+        );
+
+      // Location logic
+      let matchesLocation = true;
+
+      if (this.selectedLocation === 'Others') {
+        matchesLocation =
+          job.location !== 'Hyderabad' &&
+          job.location !== 'Bangalore' &&
+          job.location !== 'Chennai';
+      } else if (this.selectedLocation !== '') {
+        matchesLocation = job.location === this.selectedLocation;
+      }
+
+      const matchesType =
+        this.selectedTypes.length === 0 ||
+        this.selectedTypes.includes(job.type);
+
+      return matchesSearch && matchesLocation && matchesType;
+    });
+  }
+
+  onTypeChange(event: any) {
+    const value = event.target.value;
+
+    if (event.target.checked) {
+      this.selectedTypes.push(value);
+    } else {
+      this.selectedTypes = this.selectedTypes.filter(t => t !== value);
+    }
+
+    this.applyFilters();
+  }
 }

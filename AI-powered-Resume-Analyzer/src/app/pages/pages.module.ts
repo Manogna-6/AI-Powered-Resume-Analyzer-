@@ -2,6 +2,7 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { PagesRoutingModule } from './pages-routing.module';
 import { HomeComponent } from './home/home.component';
@@ -20,7 +21,8 @@ import { CoreModule } from '../core/core.module';
   imports: [
     CommonModule,
     PagesRoutingModule,
-    CoreModule
+    CoreModule,
+     FormsModule
   ]
 })
 export class PagesModule { }
